@@ -14,7 +14,7 @@
 
   <li>
     <strong>Password:</strong>
-    <%= @user.password %>
+    <%= @user.password_hash %>
   </li>
 
 </ul>

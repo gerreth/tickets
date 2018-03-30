@@ -18,6 +18,10 @@ defmodule HelloWeb.Router do
 
     get "/", PageController, :index
     get "/tickets", TicketController, :index
+    # Handling login
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+    delete "/logout", SessionController, :delete
     # get "/user", UserController, except: [:new, :edit]
     resources "/users", UserController
   end
