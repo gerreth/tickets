@@ -1,0 +1,5 @@
+<header role="header">
+  <%= link("Start", to: "/") %>
+  <%= link("Tickets", to: "/tickets") %>
+  <%= link("Users", to: "/users") %>
+</header>
