@@ -4,10 +4,6 @@ defmodule HelloWeb.UserController do
   alias Hello.Accounts
   alias Hello.Accounts.User
 
-  import Hello.Auth, only: [load_current_user: 2]
-
-  plug(:load_current_user when action in [:show, :index])
-
   def index(conn, _params) do
     users = Accounts.list_users()
     conn

@@ -3,8 +3,8 @@
 
     <%= link("Tickets", to: "/tickets") %>
     <%= link("Users", to: "/users") %>
-    Hello <%= link "Logout", to: session_path(@conn, :delete), method: :delete %>
-
+    Hello
+    <%= link "Logout", to: session_path(@conn, :delete), method: :delete %>
     <%= link("Login", to: "/login") %>
 
 </header>

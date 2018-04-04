@@ -45,6 +45,9 @@ defmodule Hello.Auth do
   end
 
   defp put_user_token(conn, user) do
+    IO.puts "===================================================================================="
+    IO.inspect user
+    IO.puts "===================================================================================="
     token = Phoenix.Token.sign(conn, "user socket", user.id)
 
     conn

@@ -40,7 +40,6 @@ defmodule HelloWeb do
       import HelloWeb.Router.Helpers
       import HelloWeb.ErrorHelpers
       import HelloWeb.Gettext
-      import Hello.Auth, only: [load_current_user: 2]
     end
   end
 

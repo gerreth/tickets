@@ -22,7 +22,7 @@ defmodule HelloWeb.SessionController do
 
   def delete(conn, _) do
     conn
-    |> Hello.Accounts.Auth.logout()
+    |> Hello.Auth.logout()
     |> redirect(to: page_path(conn, :index))
   end
 
