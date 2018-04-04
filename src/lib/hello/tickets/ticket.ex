@@ -8,7 +8,7 @@ defmodule Hello.Tickets.Ticket do
     field :priority, :string
     field :title, :string
     # Relationships
-    belongs_to :users, Hello.User, foreign_key: :user_id
+    belongs_to :users, Hello.Accounts.User, foreign_key: :user_id
 
     timestamps()
   end

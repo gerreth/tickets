@@ -4,9 +4,15 @@ defmodule HelloWeb.UserController do
   alias Hello.Accounts
   alias Hello.Accounts.User
 
+  import Hello.Auth, only: [load_current_user: 2]
+
+  plug(:load_current_user when action in [:show, :index])
+
   def index(conn, _params) do
     users = Accounts.list_users()
-    render(conn, "index.html", users: users)
+    conn
+    |> assign(:current_user, Guardian.Plug.current_resource(conn))
+    |> render("index.html", users: users)
   end
 
   def new(conn, _params) do
@@ -18,6 +24,7 @@ defmodule HelloWeb.UserController do
     case Accounts.create_user(user_params) do
       {:ok, user} ->
         conn
+        |> Hello.Auth.login(user)
         |> put_flash(:info, "User created successfully.")
         |> redirect(to: user_path(conn, :show, user))
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -30,6 +37,7 @@ defmodule HelloWeb.UserController do
     render(conn, "show.html", user: user)
   end
 
+  # Maybe needs to be edited
   def edit(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
     changeset = Accounts.change_user(user)

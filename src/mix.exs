@@ -20,7 +20,7 @@ defmodule Hello.Mixfile do
   def application do
     [
       mod: {Hello.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools, :guardian]
     ]
   end
 
@@ -44,6 +44,7 @@ defmodule Hello.Mixfile do
       # Added dependencies
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
+      {:guardian, "~> 1.0"},
       {:poison, "~> 3.1.0"},
       {:faker, "~> 0.9"},
       # GrahQL

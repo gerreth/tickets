@@ -1,31 +1,29 @@
 defmodule HelloWeb.SessionController do
   use HelloWeb, :controller
 
-  alias Hello.Repo
-  alias Hello.Accounts.Auth
-
-  def new(conn, _params) do
-    render conn, "new.html"
+  def new(conn, _) do
+    render(conn, "new.html")
   end
 
-  def create(conn, session_params) do
-    case Auth.login(session_params, Repo) do
+  def create(conn, %{"session" => %{"username" => user, "password" => password}}) do
+    case Hello.Auth.authenticate_user(user, password) do
       {:ok, user} ->
         conn
-        |> put_session(:current_user, user.id)
-        |> put_flash(:info, "Logged in")
-        |> redirect(to: "/")
-      :error ->
+        |> Hello.Auth.login(user)
+        |> put_flash(:info, "Welcome back!")
+        |> redirect(to: user_path(conn, :index))
+
+      {:error, _reason} ->
         conn
-        |> put_flash(:error, "Incorrect email or password")
+        |> put_flash(:error, "Invalid username/password combination")
         |> render("new.html")
     end
   end
 
   def delete(conn, _) do
     conn
-    |> delete_session(:current_user)
-    |> put_flash(:info, "Logged out")
-    |> redirect(to: "/")
+    |> Hello.Accounts.Auth.logout()
+    |> redirect(to: page_path(conn, :index))
   end
+
 end

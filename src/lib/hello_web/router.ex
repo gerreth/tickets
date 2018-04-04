@@ -13,6 +13,10 @@ defmodule HelloWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug(Hello.Auth.AuthAccessPipeline)
+  end
+
   scope "/", HelloWeb do
     pipe_through :browser # Use the default browser stack
 
@@ -21,6 +25,11 @@ defmodule HelloWeb.Router do
     get "/login", SessionController, :new
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
+  end
+
+  scope "/", HelloWeb do
+    pipe_through([:browser, :auth])
+
     # Resources
     resources "/tickets", TicketController
     resources "/users", UserController

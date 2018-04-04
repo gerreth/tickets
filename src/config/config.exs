@@ -17,6 +17,16 @@ config :hello, HelloWeb.Endpoint,
   pubsub: [name: Hello.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+# Configures Guardian
+config :hello, Hello.Auth.Guardian,
+  issuer: "hello",
+  secret_key: "HNinpKh9Ne3tr8BpjCpAEh0xzCqTIG3PWsfkR2AtzvUaRIpbs6oIQ9RcmjmGPekJ"
+
+config :hello, Hello.Auth.AuthAccessPipeline,
+  module: Hello.Auth.Guardian,
+  error_handler: Hello.Auth.AuthErrorHandler
+
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
