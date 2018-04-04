@@ -25,6 +25,7 @@ defmodule HelloWeb.Router do
     get "/login", SessionController, :new
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
+    resources "/users", UserController
   end
 
   scope "/", HelloWeb do
@@ -32,7 +33,7 @@ defmodule HelloWeb.Router do
 
     # Resources
     resources "/tickets", TicketController
-    resources "/users", UserController
+
   end
 
   # Other scopes may use custom stacks.

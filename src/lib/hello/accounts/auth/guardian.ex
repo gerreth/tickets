@@ -1,7 +1,7 @@
 defmodule Hello.Auth.Guardian do
   @moduledoc false
 
-  use Guardian, otp_app: :rumbl
+  use Guardian, otp_app: :hello
 
   alias Hello.Accounts
 
