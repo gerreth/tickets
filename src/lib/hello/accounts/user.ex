@@ -2,6 +2,7 @@ defmodule Hello.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
   alias Hello.Accounts.Encryption
+  alias Hello.Tickets.Ticket
 
   schema "users" do
     field :username, :string
@@ -11,7 +12,7 @@ defmodule Hello.Accounts.User do
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
     # Relationships
-    has_many :tickets, Hello.Tickets.Ticket
+    has_many :tickets, Ticket
 
     timestamps()
   end

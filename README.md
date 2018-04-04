@@ -13,10 +13,19 @@ This is basically a slightly extended 'Hello Phoenix' App with authentication
 * Phoenix
 * Authentication (https://www.youtube.com/watch?v=pC_4s9FBY2g)
 
-###
+### Postgres Cheatsheet
+
+```
+su - postgres
+psql
+
+\list
+\c <database>
+\d
+```
 
 
-# Dockerized Elixir/Phoenix Development Environment
+<!-- # Dockerized Elixir/Phoenix Development Environment
 
 ### Introduction
 I have been working on a long-running personal Phoenix project since Phoenix 1.0.2.
@@ -111,4 +120,4 @@ To run commands other than `mix` tasks, you can use the `./run` script.
 ./run iex -S mix
 ```
 
-## Todo
+## Todo -->

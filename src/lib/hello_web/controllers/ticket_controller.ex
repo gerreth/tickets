@@ -15,13 +15,19 @@ defmodule HelloWeb.TicketController do
   end
 
   def create(conn, %{"ticket" => ticket_params}) do
-    case Tickets.create_ticket(ticket_params) do
+    user_id = Plug.Conn.get_session(conn, :current_user)
+    case Tickets.create_ticket(ticket_params, user_id) do
       {:ok, ticket} ->
         conn
         |> put_flash(:info, "Ticket created successfully.")
         |> redirect(to: ticket_path(conn, :show, ticket))
+      {:auth_error, %Ecto.Changeset{} = changeset} ->
+        conn
+        |> put_flash(:auth_error, "No User Id provided (check if logged in before)")
+        |> render("new.html", changeset: changeset)
       {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "new.html", changeset: changeset)
+        conn
+        |> render("new.html", changeset: changeset)
     end
   end
 

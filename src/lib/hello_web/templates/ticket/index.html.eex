@@ -1,8 +1,8 @@
 <h2>Listing Tickets</h2>
-
 <table class="table">
   <thead>
     <tr>
+      <th>User ID</th>
       <th>Title</th>
       <th>Body</th>
       <th>Priority</th>
@@ -13,6 +13,7 @@
   <tbody>
 <%= for ticket <- @tickets do %>
     <tr>
+      <td><%= ticket.user_id %></td>
       <td><%= ticket.title %></td>
       <td><%= ticket.body %></td>
       <td><%= ticket.priority %></td>

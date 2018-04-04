@@ -4,9 +4,10 @@ defmodule Hello.Tickets do
   """
 
   import Ecto.Query, warn: false
-  alias Hello.Repo
 
+  alias Hello.Repo
   alias Hello.Tickets.Ticket
+  alias Hello.Accounts
 
   @doc """
   Returns the list of tickets.
@@ -49,7 +50,18 @@ defmodule Hello.Tickets do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_ticket(attrs \\ %{}) do
+  def create_ticket(attrs, user_id) when user_id == nil do
+    {:auth_error, %Ticket{} |> Ticket.changeset(attrs)}
+  end
+  #
+  # def create_ticket(attrs, user_id) when attrs == %{} do
+  #   %Ticket{}
+  #   |> Ticket.changeset(attrs)
+  #   |> Repo.insert()
+  # end
+
+  def create_ticket(attrs \\ %{}, user_id) do
+    attrs = Map.merge(attrs, %{"user_id" => user_id})
     %Ticket{}
     |> Ticket.changeset(attrs)
     |> Repo.insert()

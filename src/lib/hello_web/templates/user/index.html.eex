@@ -3,6 +3,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>ID</th>
       <th>Name</th>
       <th>Email</th>
       <th>Password</th>
@@ -11,8 +12,9 @@
     </tr>
   </thead>
   <tbody>
-<%= for user <- @users do %>
+  <%= for user <- @users do %>
     <tr>
+      <td><%= user.id %></td>
       <td><%= user.username %></td>
       <td><%= user.email %></td>
       <td><%= user.password_hash %></td>
@@ -23,7 +25,7 @@
         <span><%= link "Delete", to: user_path(@conn, :delete, user), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
       </td>
     </tr>
-<% end %>
+    <% end %>
   </tbody>
 </table>
 

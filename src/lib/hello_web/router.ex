@@ -21,6 +21,7 @@ defmodule HelloWeb.Router do
     get "/login", SessionController, :new
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
+    # Resources
     resources "/tickets", TicketController
     resources "/users", UserController
   end
