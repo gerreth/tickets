@@ -5,8 +5,8 @@ defmodule HelloWeb.SessionController do
     render(conn, "new.html")
   end
 
-  def create(conn, %{"session" => %{"username" => user, "password" => password}}) do
-    case Hello.Auth.authenticate_user(user, password) do
+  def create(conn, %{"session" => %{"email" => email, "password" => password}}) do
+    case Hello.Auth.authenticate_user(email, password) do
       {:ok, user} ->
         conn
         |> Hello.Auth.login(user)
