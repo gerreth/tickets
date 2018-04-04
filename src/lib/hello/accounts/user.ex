@@ -1,7 +1,7 @@
 defmodule Hello.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Hello.Accounts.{User,Encryption}
+  alias Hello.Accounts.Encryption
 
   schema "users" do
     field :username, :string
@@ -10,6 +10,8 @@ defmodule Hello.Accounts.User do
     # Virtual Fields
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
+    # Relationships
+    has_many :tickets, Hello.Tickets.Ticket
 
     timestamps()
   end
@@ -24,7 +26,7 @@ defmodule Hello.Accounts.User do
     |> validate_required([:username, :email])
     # additional validation
     |> validate_format(:email, ~r/@/)
-    |> validate_length(:password, min: 6)
+    |> validate_length(:password, min: 8)
     |> validate_confirmation(:password)
     # constraints
     |> unique_constraint(:username)

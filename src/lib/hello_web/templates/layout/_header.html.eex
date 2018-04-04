@@ -4,7 +4,7 @@
   <%= link("Users", to: "/users") %>
   <%= if logged_in?(@conn) do %>
     Hello <%= link "Logout", to: session_path(@conn, :delete), method: :delete %>
-  <%= else %>
+  <% else %>
     <%= link("Login", to: "/login") %>
-  <%= end %>
+  <% end %>
 </header>

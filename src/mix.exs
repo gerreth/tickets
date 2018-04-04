@@ -44,6 +44,12 @@ defmodule Hello.Mixfile do
       # Added dependencies
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
+      {:poison, "~> 3.1.0"},
+      {:faker, "~> 0.9"},
+      # GrahQL
+      {:absinthe, "~> 1.4.6"},
+      {:absinthe_plug, "~> 1.4.2"},
+      {:absinthe_ecto, git: "https://github.com/absinthe-graphql/absinthe_ecto.git"}
     ]
   end
 

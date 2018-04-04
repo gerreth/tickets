@@ -17,12 +17,11 @@ defmodule HelloWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    get "/tickets", TicketController, :index
     # Handling login
     get "/login", SessionController, :new
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
-    # get "/user", UserController, except: [:new, :edit]
+    resources "/tickets", TicketController
     resources "/users", UserController
   end
 
