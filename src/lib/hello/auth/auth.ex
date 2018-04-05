@@ -1,5 +1,6 @@
 defmodule Hello.Auth do
-  alias Hello.Accounts.{Encryption, User}
+  alias Hello.Accounts.User
+  alias Hello.Auth.Encryption
 
   def login(params, repo) do
     user = repo.get_by(User, email: String.downcase(params["email"]))

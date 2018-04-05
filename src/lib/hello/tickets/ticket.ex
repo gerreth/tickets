@@ -2,7 +2,6 @@ defmodule Hello.Tickets.Ticket do
   use Ecto.Schema
   import Ecto.Changeset
 
-
   schema "tickets" do
     field :body, :string
     field :priority, :string

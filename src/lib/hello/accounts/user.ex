@@ -1,7 +1,7 @@
 defmodule Hello.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Hello.Accounts.Encryption
+  alias Hello.Auth.Encryption
   alias Hello.Tickets.Ticket
 
   schema "users" do

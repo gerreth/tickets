@@ -1,4 +1,4 @@
-defmodule Hello.Accounts.Encryption do
+defmodule Hello.Auth.Encryption do
   alias Comeonin.Argon2
 
   def hash_password(password), do: Argon2.hashpwsalt(password)
