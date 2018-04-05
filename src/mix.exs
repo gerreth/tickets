@@ -46,6 +46,8 @@ defmodule Hello.Mixfile do
       {:argon2_elixir, "~> 1.2"},
       {:poison, "~> 3.1.0"},
       {:faker, "~> 0.9"},
+      #
+      {:guardian, "~> 1.0-beta"},
       # GrahQL
       {:absinthe, "~> 1.4.6"},
       {:absinthe_plug, "~> 1.4.2"},
