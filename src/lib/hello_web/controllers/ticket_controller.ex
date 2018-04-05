@@ -15,8 +15,7 @@ defmodule HelloWeb.TicketController do
   end
 
   def create(conn, %{"ticket" => ticket_params}) do
-    user_id = Plug.Conn.get_session(conn, :current_user)
-    case Tickets.create_ticket(ticket_params, user_id) do
+    case Tickets.create_ticket(ticket_params, conn) do
       {:ok, ticket} ->
         conn
         |> put_flash(:info, "Ticket created successfully.")

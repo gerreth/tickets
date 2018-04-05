@@ -37,8 +37,6 @@ defmodule Hello.Tickets do
   """
   def get_ticket!(id), do: Repo.get!(Ticket, id)
 
-
-  def create_ticket(attrs \\ %{}, user_id)
   @doc """
   Creates a ticket.
 
@@ -51,18 +49,19 @@ defmodule Hello.Tickets do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_ticket(attrs, user_id) when user_id == nil do
-    {:auth_error, %Ticket{} |> Ticket.changeset(attrs)}
+  def create_ticket(attrs = %{"body" => body, "title" => title, "priority" => priority}, conn) do
+    user_id = Plug.Conn.get_session(conn, :current_user)
+    Map.merge(attrs, %{"user_id" => user_id})
+    |> insert_ticket
   end
-  #
-  # def create_ticket(attrs, user_id) when attrs == %{} do
-  #   %Ticket{}
-  #   |> Ticket.changeset(attrs)
-  #   |> Repo.insert()
-  # end
 
-  def create_ticket(attrs, user_id) do
-    attrs = Map.merge(attrs, %{"user_id" => user_id})
+  def create_ticket(attrs = %{:body => body, :title => title, :priority => priority}) do
+    user_id = 1
+    Map.merge(attrs, %{:user_id => user_id})
+    |> insert_ticket
+  end
+
+  def insert_ticket(attrs) do
     %Ticket{}
     |> Ticket.changeset(attrs)
     |> Repo.insert()

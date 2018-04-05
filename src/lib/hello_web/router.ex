@@ -44,4 +44,15 @@ defmodule HelloWeb.Router do
   # scope "/api", HelloWeb do
   #   pipe_through :api
   # end
+  scope "/api" do
+    pipe_through :api
+
+    forward "/v1", Absinthe.Plug,
+      schema: HelloWeb.Schema
+
+    forward "/graphiql", Absinthe.Plug.GraphiQL,
+      schema: HelloWeb.Schema,
+      interface: :simple,
+      context: %{pubsub: HelloWeb.Endpoint}
+  end
 end

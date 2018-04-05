@@ -25,6 +25,10 @@ defmodule Hello.Tickets.Ticket do
     |> append_user_id(attrs)
   end
 
+  defp append_user_id(changeset, %{:body => body, :title => title, :priority => priority, :user_id => user_id}) do
+    put_change(changeset, :user_id, user_id)
+  end
+
   defp append_user_id(changeset, attrs) do
     put_change(changeset, :user_id, attrs["user_id"])
   end
