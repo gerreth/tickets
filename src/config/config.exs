@@ -22,6 +22,11 @@ config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
 
+# Configures Guardian
+config :hello, Hello.Auth.Guardian,
+  issuer: "hello", # Name of your app/company/product
+  secret_key: "m1/UgDr2K9gxwvocBVhUhKJZI6br72XmlM+ZolcmMlB6qW9NNQ7qLfA0tnZqIxfr" # Replace this with the output of the mix command
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

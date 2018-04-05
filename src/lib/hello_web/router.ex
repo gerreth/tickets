@@ -9,12 +9,20 @@ defmodule HelloWeb.Router do
     plug :put_secure_browser_headers
   end
 
+  pipeline :auth do
+    plug Hello.Auth.Pipeline
+  end
+
+  pipeline :ensure_auth do
+    plug Guardian.Plug.EnsureAuthenticated
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
 
   scope "/", HelloWeb do
-    pipe_through :browser # Use the default browser stack
+    pipe_through [:browser, :auth] # Use the default browser stack
 
     get "/", PageController, :index
     # Handling login/logout
@@ -22,8 +30,14 @@ defmodule HelloWeb.Router do
     post "/login", SessionController, :create
     delete "/logout", SessionController, :delete
     # Resources
+    resources "/users", UserController, only: [:create, :new]
+  end
+
+  scope "/", HelloWeb do
+    pipe_through [:browser, :auth, :ensure_auth]
+    # Resources
     resources "/tickets", TicketController
-    resources "/users", UserController
+    resources "/users", UserController, only: [:delete, :edit, :index, :show]
   end
 
   # Other scopes may use custom stacks.

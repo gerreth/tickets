@@ -2,7 +2,8 @@ defmodule HelloWeb.SessionController do
   use HelloWeb, :controller
 
   alias Hello.Repo
-  alias Hello.Accounts.Auth
+  alias Hello.Auth
+  alias Hello.Auth.Guardian
 
   def new(conn, _params) do
     render conn, "new.html"
@@ -12,6 +13,7 @@ defmodule HelloWeb.SessionController do
     case Auth.login(session_params, Repo) do
       {:ok, user} ->
         conn
+        |> Guardian.Plug.sign_in(user)
         |> put_session(:current_user, user.id)
         |> put_session(:current_user_name, user.username)
         |> put_flash(:info, "Logged in")
@@ -25,6 +27,7 @@ defmodule HelloWeb.SessionController do
 
   def delete(conn, _) do
     conn
+    |> Guardian.Plug.sign_out()
     |> delete_session(:current_user)
     |> put_flash(:info, "Logged out")
     |> redirect(to: "/")
