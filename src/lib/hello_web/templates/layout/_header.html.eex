@@ -1,11 +1,10 @@
-<header role="header">
-  <%= link("Start", to: "/") %>
+<header role="header" id="header">
+  <%= link("Start", to: "/", class: "heading") %>
   <%= if logged_in?(@conn) do %>
-    Hello <%= @current_user.username %>
-    <%= link("Tickets", to: "/tickets") %>
-    <%= link("Users", to: "/users") %>
-    <%= link "Logout", to: session_path(@conn, :delete), method: :delete %>
+    <%= link("Tickets", to: "/tickets", class: "heading") %>
+    <%= link("Users", to: "/users", class: "heading") %>
+    <%= link("Logout", to: session_path(@conn, :delete), method: :delete, class: "heading") %>
   <% else %>
-    <%= link("Login", to: "/login") %>
+    <%= link("Login", to: "/login", class: "heading") %>
   <% end %>
 </header>

@@ -6,19 +6,15 @@
       <th>ID</th>
       <th>Name</th>
       <th>Email</th>
-      <th>Password</th>
-
       <th></th>
     </tr>
   </thead>
   <tbody>
   <%= for user <- @users do %>
     <tr>
-      <td><%= user.id %></td>
-      <td><%= user.username %></td>
-      <td><%= user.email %></td>
-      <td><%= user.password_hash %></td>
-
+      <td><span><%= user.id %></span></td>
+      <td><span><%= user.username %></span></td>
+      <td><span><%= user.email %></span></td>
       <td class="text-right">
         <span><%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %></span>
         <span><%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %></span>

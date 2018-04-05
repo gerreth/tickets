@@ -13,15 +13,15 @@
   <tbody>
 <%= for ticket <- @tickets do %>
     <tr>
-      <td><%= ticket.user_id %></td>
-      <td><%= ticket.title %></td>
-      <td><%= ticket.body %></td>
-      <td><%= ticket.priority %></td>
+      <td><span><%= ticket.user_id %></span></td>
+      <td><span><%= ticket.title %></span></td>
+      <td><span><%= ticket.body %></span></td>
+      <td><span><%= ticket.priority %></span></td>
 
       <td class="text-right">
-        <span><%= link "Show", to: ticket_path(@conn, :show, ticket), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: ticket_path(@conn, :edit, ticket), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: ticket_path(@conn, :delete, ticket), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+        <span><%= link("Show", to: ticket_path(@conn, :show, ticket), class: "btn btn-default btn-xs") %></span>
+        <span><%= link("Edit", to: ticket_path(@conn, :edit, ticket), class: "btn btn-default btn-xs") %></span>
+        <span><%= link("Delete", to: ticket_path(@conn, :delete, ticket), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs") %></span>
       </td>
     </tr>
 <% end %>

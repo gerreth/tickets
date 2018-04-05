@@ -6,19 +6,19 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :title, class: "control-label" %>
+    <span><%= label f, :title, class: "control-label" %></span>
     <%= text_input f, :title, class: "form-control" %>
     <%= error_tag f, :title %>
   </div>
 
   <div class="form-group">
-    <%= label f, :body, class: "control-label" %>
+    <span><%= label f, :body, class: "control-label" %></span>
     <%= text_input f, :body, class: "form-control" %>
     <%= error_tag f, :body %>
   </div>
 
   <div class="form-group">
-    <%= label f, :priority, class: "control-label" %>
+    <span><%= label f, :priority, class: "control-label" %></span>
     <%= text_input f, :priority, class: "form-control" %>
     <%= error_tag f, :priority %>
   </div>

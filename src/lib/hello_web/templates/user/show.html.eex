@@ -3,18 +3,13 @@
 <ul>
 
   <li>
-    <strong>Name:</strong>
-    <%= @user.username %>
+    <span>Name:</span>
+    <span><%= @user.username %></span>
   </li>
 
   <li>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </li>
-
-  <li>
-    <strong>Password:</strong>
-    <%= @user.password_hash %>
+    <span>Email:</span>
+    <span><%= @user.email %></span>
   </li>
 
 </ul>

@@ -1,4 +1,11 @@
 
 <div>
-  <h1>Hello</h1>
+  <h1>Hello
+    <%= if logged_in?(@conn) do %>
+      Hello <%= @current_user.username %>
+    <%= end %>
+  </h1>
+  <p>
+    All of this text is editable. Simply click anywhere in the paragraph or heading text and start typing. You can copy and paste your own content in to see what it looks like with these font combinations.
+  </p>
 </div>

@@ -3,18 +3,18 @@
 <ul>
 
   <li>
-    <strong>Title:</strong>
-    <%= @ticket.title %>
+    <span>Title:</span>
+    <span><%= @ticket.title %></span>
   </li>
 
   <li>
-    <strong>Body:</strong>
-    <%= @ticket.body %>
+    <span>Body:</span>
+    <span><%= @ticket.body %></span>
   </li>
 
   <li>
-    <strong>Priority:</strong>
-    <%= @ticket.priority %>
+    <span>Priority:</span>
+    <span><%= @ticket.priority %></span>
   </li>
 
 </ul>

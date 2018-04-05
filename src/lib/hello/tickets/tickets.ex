@@ -7,7 +7,6 @@ defmodule Hello.Tickets do
 
   alias Hello.Repo
   alias Hello.Tickets.Ticket
-  alias Hello.Accounts
 
   @doc """
   Returns the list of tickets.
@@ -38,6 +37,8 @@ defmodule Hello.Tickets do
   """
   def get_ticket!(id), do: Repo.get!(Ticket, id)
 
+
+  def create_ticket(attrs \\ %{}, user_id)
   @doc """
   Creates a ticket.
 
@@ -60,7 +61,7 @@ defmodule Hello.Tickets do
   #   |> Repo.insert()
   # end
 
-  def create_ticket(attrs \\ %{}, user_id) do
+  def create_ticket(attrs, user_id) do
     attrs = Map.merge(attrs, %{"user_id" => user_id})
     %Ticket{}
     |> Ticket.changeset(attrs)

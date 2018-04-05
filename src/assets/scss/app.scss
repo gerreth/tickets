@@ -1,0 +1,49 @@
+@import "reset";
+
+a, p, span {
+  color: #333333;
+  font-family: 'Merriweather', serif;
+}
+
+h1, h2, h3, h4, h5, h6, th, .heading {
+  color: #333333;
+  font-family: 'Raleway', sans-serif;
+}
+
+body {
+  color: red;
+  line-height: 1;
+  font-size: 16px;
+  font-weight: 200;
+
+  ::selection {
+    background: #FFEB3B;
+  }
+}
+
+a {
+  color: #333333;
+  text-decoration: none;
+}
+
+.table {
+  table-layout: fixed;
+  width: 100%;
+  word-break: break-word;
+
+  th {
+
+    font-weight: 600;
+    line-height: 2em;
+    text-align: left;
+  }
+}
+
+/* Header */
+#header {
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 2em;
+  padding: 1em;
+  text-transform: uppercase;
+}

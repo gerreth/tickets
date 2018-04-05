@@ -8,6 +8,7 @@
     <meta name="author" content="">
 
     <title>Hello Hello!</title>
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500&amp;subset=latin-ext" rel="stylesheet">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 

@@ -6,25 +6,25 @@
   <% end %>
 
   <div class="form-group">
-    <%= label f, :username, class: "control-label" %>
+    <span><%= label f, :username, class: "control-label" %></span>
     <%= text_input f, :username, class: "form-control" %>
     <%= error_tag f, :username %>
   </div>
 
   <div class="form-group">
-    <%= label f, :email, class: "control-label" %>
+    <span><%= label f, :email, class: "control-label" %></span>
     <%= email_input f, :email, class: "form-control" %>
     <%= error_tag f, :email %>
   </div>
 
   <div class="form-group">
-    <%= label f, :password, class: "control-label" %>
+    <span><%= label f, :password, class: "control-label" %></span>
     <%= password_input f, :password, class: "form-control" %>
     <%= error_tag f, :password %>
   </div>
 
   <div class="form-group">
-    <%= label f, :password_confirmation, class: "control-label" %>
+    <span><%= label f, :password_confirmation, class: "control-label" %></span>
     <%= password_input f, :password_confirmation, class: "form-control" %>
     <%= error_tag f, :password_confirmation %>
   </div>

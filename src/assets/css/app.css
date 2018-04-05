@@ -1,5 +1,10 @@
 /* This file is for your main application css. */
 .table {
   word-break: break-word;
-  table-layout: fixed;
-}
+  table-layout: fixed; }
+
+body a {
+  font-size: 56px; }
+
+html {
+  font-size: 50px; }
