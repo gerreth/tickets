@@ -15,7 +15,7 @@ function reportChange(event) {
 gulp.task('css-app', function() {
   return gulp
     .src(appCssPaths)
-    .pipe(concat('app.scss'))
+    // .pipe(concat('app.scss'))
     .pipe(sass())
     .pipe(gulp.dest('../priv/static/css'));
 });

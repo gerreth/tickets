@@ -28,7 +28,7 @@
 
         </div>
       <div class="card-footer text-muted">
-        Don't have an account yet? Register <%= link "here", to: user_path(@conn, :new), class: "btn btn-outline-secondary btn-sm"%>
+        <span>Don't have an account yet? Register <%= link "here", to: user_path(@conn, :new), class: "btn btn-outline-secondary btn-sm"%></span>
       </div>
     </div>
   </div>

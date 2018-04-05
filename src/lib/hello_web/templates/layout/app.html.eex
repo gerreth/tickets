@@ -9,20 +9,17 @@
 
     <title>Hello Hello!</title>
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500&amp;subset=latin-ext" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,700" rel="stylesheet">
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
   </head>
 
   <body>
-    <%= render "_header.html", conn: @conn, current_user: @current_user %>
-
-    <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
-    <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :auth_error) %></p>
-
-    <main class="container" role="main">
-      <div class="row">
-          <%= render @view_module, @view_template, assigns %>
-      </div>
+    <%= render("_flash.html", conn: @conn) %>
+    <header role="header" id="header">
+      <%= render("_header.html", conn: @conn) %>
+    </header>
+    <main class="container" role="main" id="main">
+      <%= render(@view_module, @view_template, assigns) %>
     </main>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
