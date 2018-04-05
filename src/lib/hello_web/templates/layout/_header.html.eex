@@ -1,7 +1,7 @@
 <header role="header">
   <%= link("Start", to: "/") %>
   <%= if logged_in?(@conn) do %>
-    Hello <%= Plug.Conn.get_session(@conn, :current_user_name) %>
+    Hello <%= @current_user.username %>
     <%= link("Tickets", to: "/tickets") %>
     <%= link("Users", to: "/users") %>
     <%= link "Logout", to: session_path(@conn, :delete), method: :delete %>
