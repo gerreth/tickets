@@ -13,6 +13,7 @@ defmodule HelloWeb.SessionController do
       {:ok, user} ->
         conn
         |> put_session(:current_user, user.id)
+        |> put_session(:current_user_name, user.username)
         |> put_flash(:info, "Logged in")
         |> redirect(to: "/")
       :error ->

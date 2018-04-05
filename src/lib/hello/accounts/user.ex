@@ -17,23 +17,29 @@ defmodule Hello.Accounts.User do
     timestamps()
   end
 
-  @required_fields ~w(email username password)
+  @required_fields ~w(email username password password_confirmation)
   @optional_fields ~w()
 
   @doc false
   def changeset(user, attrs) do
     user
     |> cast(attrs, @required_fields, @optional_fields)
-    |> validate_required([:username, :email])
-    # additional validation
-    |> validate_format(:email, ~r/@/)
+    |> validate_required([:username, :email, :password, :password_confirmation])
     |> validate_length(:password, min: 8)
     |> validate_confirmation(:password)
+    # custom validation
+    |> validate_email
     # constraints
     |> unique_constraint(:username)
     # put in correct format
     |> downcase_email
     |> encrypt_password
+  end
+
+  def validate_email(changeset) do
+    format = ~r/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/
+    message = "Provide valid Email"
+    validate_format(changeset, :email, format, message: message)
   end
 
   defp encrypt_password(changeset) do
