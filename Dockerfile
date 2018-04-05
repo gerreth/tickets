@@ -16,9 +16,6 @@ RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 COPY src/ ./
 
-RUN cd assets && npm install
-RUN mix deps.get
-
 EXPOSE 4000
 
 CMD ["mix", "phx.server"]
