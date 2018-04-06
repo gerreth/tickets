@@ -35,10 +35,19 @@ defmodule Hello.Tickets do
       ** (Ecto.NoResultsError)
 
   """
-  def get_ticket!(id), do: Repo.get!(Ticket, id)
+  def get_ticket!(id) do
+    Repo.get!(Ticket, id)
+  end
+
+  def get_ticket(id) do
+    case Repo.get(Ticket, id) do
+      nil -> :error
+      ticket -> ticket
+    end
+  end
 
   @doc """
-  Creates a ticket.
+  Creates a ticket. Normal pattern
 
   ## Examples
 
@@ -55,6 +64,10 @@ defmodule Hello.Tickets do
     |> insert_ticket
   end
 
+  @doc """
+  Creates a ticket. GraphQL pattern
+
+  """
   def create_ticket(attrs = %{:body => body, :title => title, :priority => priority}) do
     user_id = 1
     Map.merge(attrs, %{:user_id => user_id})

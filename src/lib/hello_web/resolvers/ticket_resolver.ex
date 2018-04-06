@@ -1,7 +1,14 @@
 defmodule HelloWeb.TicketsResolver do
   alias Hello.Tickets
 
-  def all_tickets(_root, _args, _info) do
+  def ticket(_root, %{id: id}, _info) do
+    case Tickets.get_ticket(id) do
+      :error -> {:error, "Ticket not found"}
+      ticket -> {:ok, ticket}
+    end
+  end
+
+  def tickets(_root, _args, _info) do
     tickets = Tickets.list_tickets()
     {:ok, tickets}
   end

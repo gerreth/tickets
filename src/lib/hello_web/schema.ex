@@ -11,8 +11,13 @@ defmodule HelloWeb.Schema do
   end
 
   query do
-    field :all_tickets, non_null(list_of(non_null(:ticket))) do
-      resolve &TicketsResolver.all_tickets/3
+    field :ticket, :ticket do
+      arg :id, non_null(:id)
+      resolve &TicketsResolver.ticket/3
+    end
+
+    field :tickets, non_null(list_of(non_null(:ticket))) do
+      resolve &TicketsResolver.tickets/3
     end
   end
 

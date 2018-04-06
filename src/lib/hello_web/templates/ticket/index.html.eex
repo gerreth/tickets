@@ -2,6 +2,7 @@
 <table class="table">
   <thead>
     <tr>
+      <th>ID</th>
       <th>User ID</th>
       <th>Title</th>
       <th>Body</th>
@@ -13,6 +14,7 @@
   <tbody>
 <%= for ticket <- @tickets do %>
     <tr>
+      <td><span><%= ticket.id %></span></td>
       <td><span><%= ticket.user_id %></span></td>
       <td><span><%= ticket.title %></span></td>
       <td><span><%= ticket.body %></span></td>
