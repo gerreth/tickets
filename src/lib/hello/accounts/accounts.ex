@@ -8,6 +8,18 @@ defmodule Hello.Accounts do
 
   alias Hello.Accounts.User
 
+  def store_token(%User{} = user, token) do
+    user
+    |> User.store_token_changeset(%{token: token})
+    |> Repo.update()
+  end
+
+  def revoke_token(%User{} = user, token) do
+    user
+    |> User.store_token_changeset(%{token: token})
+    |> Repo.update()
+  end
+
   @doc """
   Returns the list of users.
 

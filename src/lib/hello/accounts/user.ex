@@ -8,6 +8,7 @@ defmodule Hello.Accounts.User do
     field :username, :string
     field :email, :string
     field :password_hash, :string
+    field :token, :string
     # Virtual Fields
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true
@@ -34,6 +35,11 @@ defmodule Hello.Accounts.User do
     # put in correct format
     |> downcase_email
     |> encrypt_password
+  end
+
+  def store_token_changeset(%Hello.Accounts.User{} = user, attrs) do
+    user
+    |> cast(attrs, [:token])
   end
 
   def validate_email(changeset) do

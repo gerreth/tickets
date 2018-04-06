@@ -21,6 +21,10 @@ defmodule HelloWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :graphql do
+    plug Hello.Context
+  end
+
   scope "/", HelloWeb do
     pipe_through [:browser, :auth] # Use the default browser stack
 
@@ -45,7 +49,7 @@ defmodule HelloWeb.Router do
   #   pipe_through :api
   # end
   scope "/api" do
-    pipe_through :api
+    pipe_through [:api, :graphql]
 
     forward "/v1", Absinthe.Plug,
       schema: HelloWeb.Schema

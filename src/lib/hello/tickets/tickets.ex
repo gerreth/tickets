@@ -60,8 +60,7 @@ defmodule Hello.Tickets do
   """
   def create_ticket(attrs = %{"body" => body, "title" => title, "priority" => priority}, conn) do
     user_id = Plug.Conn.get_session(conn, :current_user)
-    Map.merge(attrs, %{"user_id" => user_id})
-    |> insert_ticket
+    insert_ticket(attrs, user_id)
   end
 
   @doc """
@@ -69,12 +68,11 @@ defmodule Hello.Tickets do
 
   """
   def create_ticket(attrs = %{:body => body, :title => title, :priority => priority}) do
-    user_id = 1
-    Map.merge(attrs, %{:user_id => user_id})
-    |> insert_ticket
+    insert_ticket(attrs, 1)
   end
 
-  def insert_ticket(attrs) do
+  def insert_ticket(attrs, user_id) do
+    Map.merge(attrs, %{:user_id => user_id})
     %Ticket{}
     |> Ticket.changeset(attrs)
     |> Repo.insert()

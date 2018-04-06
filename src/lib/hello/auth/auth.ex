@@ -1,10 +1,33 @@
 defmodule Hello.Auth do
   alias Hello.Accounts.User
   alias Hello.Auth.Encryption
+  alias Hello.Repo
 
-  def login(params, repo) do
-    user = repo.get_by(User, email: String.downcase(params["email"]))
-    case authenticate(user, params["password"]) do
+  @doc """
+  Normal pattern
+  """
+  def login(params = %{"email" => email, "password" => password}) do
+    login(email, password)
+  end
+
+  @doc """
+  GraphQL pattern
+  """
+  def login(params = %{:email => email, :password => password}) do
+    login(email, password)
+  end
+
+  def login(email, password) do
+    user = Repo.get_by(User, email: email)
+    case authenticate(user, password) do
+      true  -> {:ok, user}
+      _     -> :error
+    end
+  end
+
+  def login_with_email_pass(email, pass) do
+    user = Hello.Repo.get_by(User, email: String.downcase(email))
+    case authenticate(user, pass) do
       true  -> {:ok, user}
       _     -> :error
     end

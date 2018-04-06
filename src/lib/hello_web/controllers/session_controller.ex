@@ -1,7 +1,6 @@
 defmodule HelloWeb.SessionController do
   use HelloWeb, :controller
 
-  alias Hello.Repo
   alias Hello.Auth
   alias Hello.Auth.Guardian
 
@@ -10,7 +9,7 @@ defmodule HelloWeb.SessionController do
   end
 
   def create(conn, session_params) do
-    case Auth.login(session_params, Repo) do
+    case Auth.login(session_params) do
       {:ok, user} ->
         conn
         |> Guardian.Plug.sign_in(user)
