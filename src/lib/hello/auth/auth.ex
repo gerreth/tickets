@@ -13,6 +13,7 @@ defmodule Hello.Auth do
   """
   def login(params = %{:email => email, :password => password}), do: login(email, password)
 
+  @doc false
   def login(email, password) do
     user = Repo.get_by(User, email: email)
     case authenticate(user, password) do
@@ -21,6 +22,7 @@ defmodule Hello.Auth do
     end
   end
 
+  @doc false
   defp authenticate(user, password) do
     case user do
       nil -> false
@@ -28,10 +30,12 @@ defmodule Hello.Auth do
     end
   end
 
+  @doc false
   def current_user(conn) do
     id = Plug.Conn.get_session(conn, :current_user)
     if id, do: Hello.Repo.get(User, id)
   end
 
+  @doc false
   def logged_in?(conn), do: !!current_user(conn)
 end

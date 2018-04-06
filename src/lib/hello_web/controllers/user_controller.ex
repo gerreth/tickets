@@ -3,6 +3,7 @@ defmodule HelloWeb.UserController do
 
   alias Hello.Accounts
   alias Hello.Accounts.User
+  alias Hello.Auth.Guardian
 
   def index(conn, _params) do
     users = Accounts.list_users()
@@ -19,10 +20,13 @@ defmodule HelloWeb.UserController do
       {:ok, user} ->
         conn
         |> put_flash(:info, "User created successfully.")
-        |> redirect(to: user_path(conn, :show, user))
+        |> Guardian.Plug.sign_in(user)
+        |> put_session(:current_user, user.id)
+        |> redirect(to: user_path(conn, :index))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
+
   end
 
   def show(conn, %{"id" => id}) do

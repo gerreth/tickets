@@ -14,7 +14,6 @@ defmodule HelloWeb.SessionController do
         conn
         |> Guardian.Plug.sign_in(user)
         |> put_session(:current_user, user.id)
-        |> put_session(:current_user_name, user.username)
         |> put_flash(:info, "Logged in")
         |> redirect(to: "/")
       :error ->
