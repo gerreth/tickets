@@ -8,16 +8,12 @@ defmodule Hello.Accounts do
 
   alias Hello.Accounts.User
 
-  def store_token(%User{} = user, token) do
+  def update_token(%User{} = user, token) do
     user
     |> User.store_token_changeset(%{token: token})
     |> Repo.update()
-  end
-
-  def revoke_token(%User{} = user, token) do
-    user
-    |> User.store_token_changeset(%{token: token})
-    |> Repo.update()
+    
+    {:ok, user}
   end
 
   @doc """
@@ -48,6 +44,13 @@ defmodule Hello.Accounts do
 
   """
   def get_user!(id), do: Repo.get!(User, id)
+
+  def get_user(id) do
+    case Repo.get(User, id) do
+      nil -> :error
+      user -> user
+    end
+  end
 
   @doc """
   Creates a user.
