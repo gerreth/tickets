@@ -8,37 +8,17 @@ defmodule Hello.Tickets do
   alias Hello.Repo
   alias Hello.Tickets.Ticket
 
-  @doc """
-  Returns the list of tickets.
-
-  ## Examples
-
-      iex> list_tickets()
-      [%Ticket{}, ...]
-
-  """
+  @doc false
   def list_tickets do
     Repo.all(Ticket)
   end
 
-  @doc """
-  Gets a single ticket.
-
-  Raises `Ecto.NoResultsError` if the Ticket does not exist.
-
-  ## Examples
-
-      iex> get_ticket!(123)
-      %Ticket{}
-
-      iex> get_ticket!(456)
-      ** (Ecto.NoResultsError)
-
-  """
+  @doc false
   def get_ticket!(id) do
     Repo.get!(Ticket, id)
   end
 
+  @doc false
   def get_ticket(id) do
     case Repo.get(Ticket, id) do
       nil -> :error
@@ -46,82 +26,43 @@ defmodule Hello.Tickets do
     end
   end
 
-  @doc """
-  Creates a ticket. Normal pattern
-
-  ## Examples
-
-      iex> create_ticket(%{field: value})
-      {:ok, %Ticket{}}
-
-      iex> create_ticket(%{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
+  @doc false
   def create_ticket(attrs = %{"body" => body, "title" => title, "priority" => priority}, conn) do
     user_id = Plug.Conn.get_session(conn, :current_user)
-    attrs = Map.merge(attrs, %{"user_id" => user_id})
-    insert_ticket(attrs)
+    # converts string keys to atoms to be consistent with graphql syntax
+    attrs = attrs |> Enum.reduce(%{}, fn ({key, val}, acc) -> Map.put(acc, String.to_atom(key), val) end)
+
+    insert_ticket(attrs, user_id)
   end
 
-  @doc """
-  Creates a ticket. GraphQL pattern
-  """
+  @doc false
   def create_ticket(attrs = %{:body => body, :title => title, :priority => priority}) do
-    user_id = 1
-    attrs = Map.merge(attrs, %{:user_id => user_id})
     insert_ticket(attrs)
   end
 
-  def insert_ticket(attrs) do
+  @doc false
+  defp insert_ticket(attrs, user_id \\ 1) do
+    attrs = Map.merge(attrs, %{:user_id => user_id})
     %Ticket{}
     |> Ticket.changeset(attrs)
     |> Repo.insert()
   end
 
-  @doc """
-  Updates a ticket.
-
-  ## Examples
-
-      iex> update_ticket(ticket, %{field: new_value})
-      {:ok, %Ticket{}}
-
-      iex> update_ticket(ticket, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-  def update_ticket(%Ticket{} = ticket, attrs) do
+  @doc false
+  def update_ticket(%Ticket{} = ticket, attrs, conn) do
+    user_id = Plug.Conn.get_session(conn, :current_user)
+    attrs = Map.merge(attrs, %{"user_id" => user_id})
     ticket
     |> Ticket.changeset(attrs)
     |> Repo.update()
   end
 
-  @doc """
-  Deletes a Ticket.
-
-  ## Examples
-
-      iex> delete_ticket(ticket)
-      {:ok, %Ticket{}}
-
-      iex> delete_ticket(ticket)
-      {:error, %Ecto.Changeset{}}
-
-  """
+  @doc false
   def delete_ticket(%Ticket{} = ticket) do
     Repo.delete(ticket)
   end
 
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking ticket changes.
-
-  ## Examples
-
-      iex> change_ticket(ticket)
-      %Ecto.Changeset{source: %Ticket{}}
-
-  """
+  @doc false
   def change_ticket(%Ticket{} = ticket) do
     Ticket.changeset(ticket, %{})
   end

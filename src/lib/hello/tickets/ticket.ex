@@ -1,6 +1,7 @@
 defmodule Hello.Tickets.Ticket do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Hello.Tickets.Ticket.Helper
 
   schema "tickets" do
     field :body, :string
@@ -21,16 +22,8 @@ defmodule Hello.Tickets.Ticket do
     |> cast(attrs, @required_fields, @optional_fields)
     |> validate_required([:title, :body, :priority])
     |> foreign_key_constraint(:users, name: :tickets_user_id_fkey)
-    #
-    |> append_user_id(attrs)
-  end
-
-  defp append_user_id(changeset, %{:body => body, :title => title, :priority => priority, :user_id => user_id}) do
-    put_change(changeset, :user_id, user_id)
-  end
-
-  defp append_user_id(changeset, attrs) do
-    put_change(changeset, :user_id, attrs["user_id"])
+    # custom
+    |> Helper.append_user_id(attrs)
   end
 
 end

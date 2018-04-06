@@ -1,7 +1,8 @@
 defmodule Hello.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-  alias Hello.Auth.Encryption
+  
+  alias Hello.Accounts.User.Helper
   alias Hello.Tickets.Ticket
 
   schema "users" do
@@ -29,38 +30,13 @@ defmodule Hello.Accounts.User do
     |> validate_length(:password, min: 8)
     |> validate_confirmation(:password)
     # custom validation
-    |> validate_email
+    |> Helper.validate_email
     # constraints
     |> unique_constraint(:username, [message: "Username has already been taken"])
     |> unique_constraint(:email, [message: "Email already exists"])
-    # put in correct format
-    |> downcase_email
-    |> encrypt_password
+    # custom format
+    |> Helper.downcase_email
+    |> Helper.encrypt_password
   end
 
-  def store_token_changeset(%Hello.Accounts.User{} = user, attrs) do
-    user
-    |> cast(attrs, [:token])
-  end
-
-  def validate_email(changeset) do
-    format = ~r/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/
-    message = "Provide valid Email"
-    validate_format(changeset, :email, format, message: message)
-  end
-
-  defp encrypt_password(changeset) do
-    password = get_change(changeset, :password)
-
-    if password do
-      encrypted_password = Encryption.hash_password(password)
-      put_change(changeset, :password_hash, encrypted_password)
-    else
-      changeset
-    end
-  end
-
-  def downcase_email(changeset) do
-    update_change(changeset, :email, &String.downcase/1)
-  end
 end

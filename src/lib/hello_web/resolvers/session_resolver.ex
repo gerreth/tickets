@@ -8,6 +8,10 @@ defmodule HelloWeb.SessionResolver do
     end
   end
 
+  def logged_in?(id) do
+    
+  end
+
   def logout(args = %{id: id, token: token}, _info) do
     case Hello.Accounts.get_user(id) do
       :error -> {:error, "User not found"}

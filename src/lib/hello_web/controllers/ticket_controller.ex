@@ -44,7 +44,7 @@ defmodule HelloWeb.TicketController do
   def update(conn, %{"id" => id, "ticket" => ticket_params}) do
     ticket = Tickets.get_ticket!(id)
 
-    case Tickets.update_ticket(ticket, ticket_params) do
+    case Tickets.update_ticket(ticket, ticket_params, conn) do
       {:ok, ticket} ->
         conn
         |> put_flash(:info, "Ticket updated successfully.")
