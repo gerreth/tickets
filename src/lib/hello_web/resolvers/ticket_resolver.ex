@@ -1,4 +1,4 @@
-defmodule HelloWeb.TicketsResolver do
+defmodule HelloWeb.TicketResolver do
   alias Hello.Tickets
 
   def ticket(_root, %{id: id}, _info) do

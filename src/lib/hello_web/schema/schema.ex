@@ -1,9 +1,10 @@
 defmodule HelloWeb.Schema do
   use Absinthe.Schema
-  import_types(Hello.Web.Schema.Types)
+  import_types Hello.Web.Schema.Types
 
-  alias HelloWeb.TicketsResolver
   alias HelloWeb.SessionResolver
+  alias HelloWeb.TicketResolver
+  alias HelloWeb.UserResolver
 
   query do
     field :login, :session do
@@ -15,11 +16,20 @@ defmodule HelloWeb.Schema do
 
     field :ticket, :ticket do
       arg :id, non_null(:id)
-      resolve &TicketsResolver.ticket/3
+      resolve &TicketResolver.ticket/3
     end
 
     field :tickets, non_null(list_of(non_null(:ticket))) do
-      resolve &TicketsResolver.tickets/3
+      resolve &TicketResolver.tickets/3
+    end
+
+    field :user, :user do
+      arg :id, non_null(:id)
+      resolve &UserResolver.user/3
+    end
+
+    field :users, non_null(list_of(non_null(:user))) do
+      resolve &UserResolver.users/3
     end
   end
 
@@ -36,7 +46,7 @@ defmodule HelloWeb.Schema do
       arg :body, non_null(:string)
       arg :priority, non_null(:string)
 
-      resolve &TicketsResolver.create_ticket/3
+      resolve &TicketResolver.create_ticket/3
     end
   end
 end

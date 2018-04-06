@@ -6,20 +6,14 @@ defmodule Hello.Auth do
   @doc """
   Normal pattern
   """
-  def login(params = %{"email" => email, "password" => password}) do
-    login(email, password)
-  end
+  def login(params = %{"email" => email, "password" => password}), do: login(email, password)
 
   @doc """
   GraphQL pattern
   """
-  def login(params = %{:email => email, :password => password}) do
-    login(email, password)
-  end
+  def login(params = %{:email => email, :password => password}), do: login(email, password)
 
   def login(email, password) do
-    IO.inspect email
-    IO.inspect password
     user = Repo.get_by(User, email: email)
     case authenticate(user, password) do
       true  -> {:ok, user}

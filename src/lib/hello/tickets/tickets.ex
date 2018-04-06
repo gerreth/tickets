@@ -60,19 +60,20 @@ defmodule Hello.Tickets do
   """
   def create_ticket(attrs = %{"body" => body, "title" => title, "priority" => priority}, conn) do
     user_id = Plug.Conn.get_session(conn, :current_user)
-    insert_ticket(attrs, user_id)
+    attrs = Map.merge(attrs, %{"user_id" => user_id})
+    insert_ticket(attrs)
   end
 
   @doc """
   Creates a ticket. GraphQL pattern
-
   """
   def create_ticket(attrs = %{:body => body, :title => title, :priority => priority}) do
-    insert_ticket(attrs, 1)
+    user_id = 1
+    attrs = Map.merge(attrs, %{:user_id => user_id})
+    insert_ticket(attrs)
   end
 
-  def insert_ticket(attrs, user_id) do
-    Map.merge(attrs, %{:user_id => user_id})
+  def insert_ticket(attrs) do
     %Ticket{}
     |> Ticket.changeset(attrs)
     |> Repo.insert()

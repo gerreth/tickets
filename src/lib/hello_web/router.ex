@@ -44,10 +44,6 @@ defmodule HelloWeb.Router do
     resources "/users", UserController, only: [:delete, :edit, :index, :show, :update]
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", HelloWeb do
-  #   pipe_through :api
-  # end
   scope "/api" do
     pipe_through [:api, :graphql]
 
