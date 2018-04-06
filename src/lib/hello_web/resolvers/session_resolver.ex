@@ -4,7 +4,7 @@ defmodule HelloWeb.SessionResolver do
     with {:ok, user} <- Hello.Auth.login(args),
          {:ok, jwt, _} <- Hello.Auth.Guardian.encode_and_sign(user),
          {:ok, _ } <- Hello.Accounts.update_token(user, jwt) do
-      {:ok, %{token: jwt}}
+      {:ok, %{token: jwt, id: user.id}}
     end
   end
 

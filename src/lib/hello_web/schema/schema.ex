@@ -1,22 +1,9 @@
 defmodule HelloWeb.Schema do
   use Absinthe.Schema
+  import_types(Hello.Web.Schema.Types)
 
   alias HelloWeb.TicketsResolver
   alias HelloWeb.SessionResolver
-
-  object :ticket do
-    field :id, non_null(:id)
-    field :title, non_null(:string)
-    field :body, non_null(:string)
-    field :priority, non_null(:string)
-  end
-
-  object :session do
-    field :id, non_null(:id)
-    field :email, non_null(:string)
-    field :password, non_null(:string)
-    field :token, non_null(:string)
-  end
 
   query do
     field :login, :session do

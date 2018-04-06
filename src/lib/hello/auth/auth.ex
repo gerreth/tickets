@@ -18,16 +18,10 @@ defmodule Hello.Auth do
   end
 
   def login(email, password) do
+    IO.inspect email
+    IO.inspect password
     user = Repo.get_by(User, email: email)
     case authenticate(user, password) do
-      true  -> {:ok, user}
-      _     -> :error
-    end
-  end
-
-  def login_with_email_pass(email, pass) do
-    user = Hello.Repo.get_by(User, email: String.downcase(email))
-    case authenticate(user, pass) do
       true  -> {:ok, user}
       _     -> :error
     end
