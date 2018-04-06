@@ -5,8 +5,8 @@ defmodule Hello.Accounts.User do
   alias Hello.Tickets.Ticket
 
   schema "users" do
-    field :username, :string
-    field :email, :string
+    field :username, :string, unique: true
+    field :email, :string, unique: true
     field :password_hash, :string
     field :token, :string
     # Virtual Fields
@@ -31,7 +31,8 @@ defmodule Hello.Accounts.User do
     # custom validation
     |> validate_email
     # constraints
-    |> unique_constraint(:username)
+    |> unique_constraint(:username, [message: "Username has already been taken"])
+    |> unique_constraint(:email, [message: "Email already exists"])
     # put in correct format
     |> downcase_email
     |> encrypt_password
