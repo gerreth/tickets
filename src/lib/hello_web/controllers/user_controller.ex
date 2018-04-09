@@ -6,8 +6,9 @@ defmodule HelloWeb.UserController do
   alias Hello.Auth.Guardian
 
   def index(conn, _params) do
-    users = Accounts.list_users()
-    render(conn, "index.html", users: users)
+    users = Accounts.list_users(false)  # user.deleted == true/false
+    inactive_users = Accounts.list_users(true)  # user.deleted == true/false
+    render(conn, "index.html", users: users, inactive_users: inactive_users)
   end
 
   def new(conn, _params) do
@@ -51,6 +52,24 @@ defmodule HelloWeb.UserController do
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "edit.html", user: user, changeset: changeset)
     end
+  end
+
+  def deactivate(conn, %{"id" => id}) do
+    user = Accounts.get_user!(id)
+    {:ok, _user} = Accounts.deactivate_user(user)
+
+    conn
+    |> put_flash(:info, "User deactivated successfully.")
+    |> redirect(to: user_path(conn, :index))
+  end
+
+  def activate(conn, %{"id" => id}) do
+    user = Accounts.get_user!(id)
+    {:ok, _user} = Accounts.activate_user(user)
+
+    conn
+    |> put_flash(:info, "User activated successfully.")
+    |> redirect(to: user_path(conn, :index))
   end
 
   def delete(conn, %{"id" => id}) do

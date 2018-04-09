@@ -8,6 +8,7 @@ defmodule Hello.Repo.Migrations.CreateUsers do
       add :email, :string
       add :password_hash, :string
       add :token, :text
+      add :deleted, :boolean, null: false, default: false
 
       timestamps()
     end

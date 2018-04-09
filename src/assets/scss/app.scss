@@ -30,6 +30,7 @@ a {
 }
 
 .table {
+  margin-bottom: 1em;
   table-layout: fixed;
   width: 100%;
   word-break: break-word;
@@ -50,4 +51,10 @@ a {
     line-height: 2em;
     text-transform: uppercase;
   }
+}
+
+/* Main */
+.container {
+  margin: 0 auto;
+  max-width: 1000px;
 }

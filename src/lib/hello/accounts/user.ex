@@ -1,7 +1,7 @@
 defmodule Hello.Accounts.User do
   use Ecto.Schema
   import Ecto.Changeset
-  
+
   alias Hello.Accounts.User.Helper
   alias Hello.Tickets.Ticket
 
@@ -10,6 +10,7 @@ defmodule Hello.Accounts.User do
     field :email, :string, unique: true
     field :password_hash, :string
     field :token, :string
+    field :deleted, :boolean, null: false, default: false
     # Virtual Fields
     field :password, :string, virtual: true
     field :password_confirmation, :string, virtual: true

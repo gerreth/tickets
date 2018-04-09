@@ -41,7 +41,10 @@ defmodule HelloWeb.Router do
     pipe_through [:browser, :auth, :ensure_auth]
     # Resources
     resources "/tickets", TicketController
-    resources "/users", UserController, only: [:delete, :edit, :index, :show, :update]
+    resources "/users", UserController
+    # Additional routes for resources
+    post "/users/:id/deactivate", UserController, :deactivate
+    post "/users/:id/activate", UserController, :activate
   end
 
   scope "/api" do

@@ -9,7 +9,7 @@ defmodule HelloWeb.UserResolver do
   end
 
   def users(_root, _args, _info) do
-    users = Accounts.list_users()
+    users = Accounts.list_users(false)  # user.deleted == true/false
     {:ok, users}
   end
 

@@ -39,6 +39,7 @@ defmodule Hello.Mixfile do
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 2.10"},
       {:phoenix_live_reload, "~> 1.0", only: :dev},
+      {:ecto_enum, "~> 1.0"},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
       # Added dependencies
@@ -46,7 +47,7 @@ defmodule Hello.Mixfile do
       {:argon2_elixir, "~> 1.2"},
       {:poison, "~> 3.1.0"},
       {:faker, "~> 0.9"},
-      #
+      # Authentication
       {:guardian, "~> 1.0-beta"},
       # GrahQL
       {:absinthe, "~> 1.4.6"},

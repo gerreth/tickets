@@ -7,6 +7,8 @@ defmodule Hello.Repo.Migrations.CreateTickets do
       add :body, :string
       add :priority, :string
       add :user_id, references(:users, on_delete: :nothing), null: false
+      add :status, :string
+      add :deleted, :boolean, null: false, default: false
 
       timestamps()
     end

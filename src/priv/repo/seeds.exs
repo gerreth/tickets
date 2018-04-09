@@ -13,7 +13,8 @@ alias Hello.Repo
 alias Hello.Accounts.User
 
 Repo.insert! %User{
+  id: 1,
   username: "Gerret",
   email: "plan-d@web.de",
-  password: "Password",
+  password_hash: "$argon2i$v=19$m=65536,t=6,p=1$CuQxGApOLfb/rJHI3Yp/Rw$kG3dB4aif2zccaG6C0/F+0moLVAn3fWJ3zg+qcAOkpo",
 }

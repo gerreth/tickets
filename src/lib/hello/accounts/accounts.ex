@@ -4,6 +4,7 @@ defmodule Hello.Accounts do
   """
 
   import Ecto.Query, warn: false
+  import Ecto.Changeset
   alias Hello.Repo
 
   alias Hello.Accounts.User
@@ -20,6 +21,12 @@ defmodule Hello.Accounts do
   @doc false
   def list_users do
     Repo.all(User)
+  end
+
+  @doc false
+  def list_users(deleted \\ false) do
+    from(u in User, where: u.deleted == ^deleted)
+    |> Repo.all
   end
 
   @doc false
@@ -44,6 +51,20 @@ defmodule Hello.Accounts do
   def update_user(%User{} = user, attrs) do
     user
     |> User.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc false
+  def activate_user(%User{} = user) do
+    user
+    |> change(deleted: false)
+    |> Repo.update()
+  end
+
+  @doc false
+  def deactivate_user(%User{} = user) do
+    user
+    |> change(deleted: true)
     |> Repo.update()
   end
 

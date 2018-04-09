@@ -1,3 +1,8 @@
+import EctoEnum
+
+defenum PriorityEnum, :priority, [:low, :medium, :high]
+defenum StatusEnum, :status, [:created, :started, :finished, :accepted]
+
 defmodule Hello.Tickets.Ticket do
   use Ecto.Schema
   import Ecto.Changeset
@@ -5,8 +10,10 @@ defmodule Hello.Tickets.Ticket do
 
   schema "tickets" do
     field :body, :string
-    field :priority, :string
+    field :priority, PriorityEnum, default: :low
     field :title, :string
+    field :status, StatusEnum, default: :created
+    field :deleted, :boolean, null: false, default: false
     # Relationships
     belongs_to :users, Hello.Accounts.User, foreign_key: :user_id
 
