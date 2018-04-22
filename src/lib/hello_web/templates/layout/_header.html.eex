@@ -1,6 +1,8 @@
 <%= link("Start", to: "/", class: "heading") %>
 <%= if logged_in?(@conn) do %>
-  <%= link("Tickets", to: "/tickets", class: "heading") %>
+  <%= if is_active?(@conn) do %>
+    <%= link("Tickets", to: "/tickets", class: "heading") %>
+  <%= end %>
   <%= link("Users", to: "/users", class: "heading") %>
   <%= link("Logout", to: session_path(@conn, :delete), method: :delete, class: "heading") %>
 <% else %>

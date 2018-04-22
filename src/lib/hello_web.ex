@@ -41,6 +41,7 @@ defmodule HelloWeb do
       import HelloWeb.ErrorHelpers
       import HelloWeb.Gettext
       import Hello.Auth, only: [current_user: 1, logged_in?: 1]
+      import Hello.Accounts, only: [is_active?: 1]
     end
   end
 

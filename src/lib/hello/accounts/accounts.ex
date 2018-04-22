@@ -77,4 +77,9 @@ defmodule Hello.Accounts do
   def change_user(%User{} = user) do
     User.changeset(user, %{})
   end
+
+  @doc false
+  def is_active?(conn) do
+    !conn.assigns.current_user.deleted
+  end
 end

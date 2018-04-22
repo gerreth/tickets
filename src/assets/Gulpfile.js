@@ -17,7 +17,8 @@ gulp.task('css-app', function() {
     .src(appCssPaths)
     // .pipe(concat('app.scss'))
     .pipe(sass())
-    .pipe(gulp.dest('../priv/static/css'));
+    .pipe(gulp.dest('../priv/static/css'))
+    .pipe(gulp.dest('css'));
 });
 
 gulp.task('default', [
