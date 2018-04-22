@@ -20,7 +20,7 @@
       <td class="text-right">
         <span><%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %></span>
         <span><%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Deactivate", to: user_path(@conn, :deactivate, user), method: :deactivate, class: "btn btn-xs" %></span>
+        <span><%= link "Deactivate", to: user_path(@conn, :toggle_status, user), method: :toggle_status, class: "btn btn-xs" %></span>
       </td>
     </tr>
     <% end %>
@@ -47,7 +47,7 @@
       <td class="text-right">
         <span><%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %></span>
         <span><%= link "Edit", to: user_path(@conn, :edit, user), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Activate", to: user_path(@conn, :activate, user), method: :activate, class: "btn btn-xs" %></span>
+        <span><%= link "Activate", to: user_path(@conn, :toggle_status, user), method: :toggle_status, class: "btn btn-xs" %></span>
       </td>
     </tr>
     <% end %>

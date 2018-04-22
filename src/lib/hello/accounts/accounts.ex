@@ -55,16 +55,9 @@ defmodule Hello.Accounts do
   end
 
   @doc false
-  def activate_user(%User{} = user) do
+  def toggle_user_deleted(%User{} = user) do
     user
-    |> change(deleted: false)
-    |> Repo.update()
-  end
-
-  @doc false
-  def deactivate_user(%User{} = user) do
-    user
-    |> change(deleted: true)
+    |> change(deleted: !user.deleted)
     |> Repo.update()
   end
 

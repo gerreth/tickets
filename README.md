@@ -2,9 +2,6 @@
 
 ## Prerequisites
 
-* MVC
-Symfony, Laravel, Yii (PHP), Ruby-on-Rails (Ruby), Django (Python)
-
 * Docker
 + docker-compose
 
@@ -12,8 +9,19 @@ This is basically a slightly extended 'Hello Phoenix' App with authentication
 * Elixir (https://pragmaticstudio.com/courses/elixir)
 * Phoenix
 * Authentication (https://www.youtube.com/watch?v=pC_4s9FBY2g)
+* GraphQL
 
-### Postgres Cheatsheet
+## Installation
+
+## Cheatsheets
+
+### Mix
+```
+mix phoenix.gen.resource Accounts user name:string ...
+```
+
+
+### Postgres
 
 ```
 su - postgres

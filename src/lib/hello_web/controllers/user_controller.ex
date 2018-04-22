@@ -54,21 +54,12 @@ defmodule HelloWeb.UserController do
     end
   end
 
-  def deactivate(conn, %{"id" => id}) do
+  def toggle_status(conn, %{"id" => id}) do
     user = Accounts.get_user!(id)
-    {:ok, _user} = Accounts.deactivate_user(user)
+    {:ok, user} = Accounts.toggle_user_deleted(user)
 
     conn
-    |> put_flash(:info, "User deactivated successfully.")
-    |> redirect(to: user_path(conn, :index))
-  end
-
-  def activate(conn, %{"id" => id}) do
-    user = Accounts.get_user!(id)
-    {:ok, _user} = Accounts.activate_user(user)
-
-    conn
-    |> put_flash(:info, "User activated successfully.")
+    |> put_flash(:info, "User #{user.deleted && 'deactivated' || 'activated'} successfully.")
     |> redirect(to: user_path(conn, :index))
   end
 

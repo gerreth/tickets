@@ -42,9 +42,8 @@ defmodule HelloWeb.Router do
     # Resources
     resources "/tickets", TicketController
     resources "/users", UserController
-    # Additional routes for resources
-    post "/users/:id/deactivate", UserController, :deactivate
-    post "/users/:id/activate", UserController, :activate
+    # Additional routes for user resource
+    post "/users/:id/toggle_status", UserController, :toggle_status
   end
 
   scope "/api" do
